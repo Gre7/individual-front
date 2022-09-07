@@ -1,0 +1,17 @@
+version: "3.9"
+services:
+  postgres_bd:
+    image: postgres:14.2
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+  back-end:
+    image: docker.io/library/individual:0.0.1-SNAPSHOT
+    depends_on:
+      - postgres_bd
+    environment:
+      PG_URL: "postgres_bd:5432"
+    ports:
+      - "8080:8080"
