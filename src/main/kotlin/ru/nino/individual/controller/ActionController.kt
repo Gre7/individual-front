@@ -8,7 +8,7 @@ import ru.nino.individual.repository.ActionRepository
 @RequestMapping("action")
 @RestController
 class ActionController(
-    var actionRepository: ActionRepository
+    val actionRepository: ActionRepository
 ) {
 
     @GetMapping("all")

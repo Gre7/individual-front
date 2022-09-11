@@ -4,15 +4,18 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.web.bind.annotation.*
 import ru.nino.individual.entity.Action
 import ru.nino.individual.entity.Company
+import ru.nino.individual.entity.ImageEntity
 import ru.nino.individual.repository.ActionRepository
 import ru.nino.individual.repository.CompanyRepository
+import ru.nino.individual.repository.ImageRepository
 import java.util.function.Consumer
 
 @RequestMapping("company")
 @RestController
 class CompanyController(
-    var repository: CompanyRepository,
-    var repositoryAction: ActionRepository
+    val repository: CompanyRepository,
+    val repositoryAction: ActionRepository,
+    val imageRepository: ImageRepository
 ) {
 
     @GetMapping("all")
@@ -50,7 +53,18 @@ class CompanyController(
             return get;
         }
         return null;
+    }
 
+    @PutMapping("{id}/addedImage")
+    fun addedImage(@PathVariable id: Long, @RequestBody images: List<Long>): Company {
+        val findAllById = imageRepository.findAllById(images)
+        var company = repository.findByIdOrNull(id)
+        company?.imageEntity = findAllById as MutableList<ImageEntity>
+
+        if (company != null) {
+            return repository.save(company)
+        }
+        return Company.EMPTY;
     }
 
 }
