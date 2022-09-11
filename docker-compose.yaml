@@ -8,7 +8,7 @@ services:
     ports:
       - "5432:5432"
   back-end:
-    image: docker.io/library/individual:0.0.1-SNAPSHOT
+    image: individual:0.0.1-SNAPSHOT
     depends_on:
       - postgres_bd
     environment:
