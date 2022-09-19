@@ -10,7 +10,8 @@
       "@redux/*": ["src/redux/*"],
       "@hooks/*": ["src/hooks/*"],
       "@axios/*": ["src/axios/*"],
-      "@models/*": ["src/models/*"]
+      "@models/*": ["src/models/*"],
+      "@images/*": ["src/images/*"]
     }
   }
 }
